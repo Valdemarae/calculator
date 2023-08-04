@@ -110,6 +110,14 @@ function buttonEvents () {
                 array.pop();
             });
         }
+        else if (button.classList.contains('clear')) {
+            button.addEventListener('click', () => {
+                displayValues.textContent = "";
+                history.textContent = "";
+                operator = undefined;
+                array.length = 0;
+            });
+        }
     }
 }
 

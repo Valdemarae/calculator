@@ -97,7 +97,11 @@ function buttonEvents () {
                 displayValues.textContent = "";
             });
         } else if (button.classList.contains('dot')) {
-            button.addEventListener('click', () => displayValues.textContent += '.');
+            button.addEventListener('click', () => {
+                if (!displayValues.textContent.includes('.')) {
+                    displayValues.textContent += '.';
+                }
+            });
         } else if (button.classList.contains('0')) {
             button.addEventListener('click', () => displayValues.textContent += '0');
         } else if (button.classList.contains('=')) {

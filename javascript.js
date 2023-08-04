@@ -51,33 +51,49 @@ function buttonEvents () {
         } else if (button.classList.contains('divi')) {
             button.addEventListener('click', () => {
                 array.push(Number(displayValues.textContent));
+                if (operator == '=') {
+                    history.textContent += "÷";
+                } else {
+                    history.textContent += displayValues.textContent + "÷";
+                }
                 operation();
                 operator = '/';
-                displayContent += displayValues.textContent + "÷";
                 displayValues.textContent = "";
             });
         } else if (button.classList.contains('multi')) {
             button.addEventListener('click', () => {
                 array.push(Number(displayValues.textContent));
                 operation();
+                if (operator == '=') {
+                    history.textContent += "×";
+                } else {
+                    history.textContent += displayValues.textContent + "×";
+                }
                 operator = '*';
-                displayContent += displayValues.textContent + "×";
                 displayValues.textContent = "";
             });
         } else if (button.classList.contains('addd')) {
             button.addEventListener('click', () => {
                 array.push(Number(displayValues.textContent));
                 operation();
+                if (operator == '=') {
+                    history.textContent += "+";
+                } else {
+                    history.textContent += displayValues.textContent + "+";
+                }
                 operator = '+';
-                displayContent += displayValues.textContent + "+";
                 displayValues.textContent = "";
             });
         } else if (button.classList.contains('subtra')) {
             button.addEventListener('click', () => {
                 array.push(Number(displayValues.textContent));
                 operation();
+                if (operator == '=') {
+                    history.textContent += "-";
+                } else {
+                    history.textContent += displayValues.textContent + "-";
+                }
                 operator = '-';
-                displayContent += displayValues.textContent + "-";
                 displayValues.textContent = "";
             });
         } else if (button.classList.contains('dot')) {
@@ -88,7 +104,9 @@ function buttonEvents () {
             button.addEventListener('click', () => {
                 array.push(Number(displayValues.textContent));
                 operation();
+                operator = "=";
                 displayValues.textContent = array[0];
+                history.textContent = array[0];
                 array.pop();
             });
         }
@@ -108,9 +126,10 @@ let firstNumber, secondNumber, operator;
 firstNumber = 0;
 
 const buttons = document.querySelectorAll('button');
+const history = document.querySelector('.history');
 const displayValues = document.querySelector('.displayValues');
 
-let displayContent = "";
+history.textContent = "";
 let array = [];
 
 buttonEvents();

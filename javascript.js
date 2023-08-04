@@ -28,7 +28,7 @@ function operate () {
     }
 }
 
-function displayButtonValue () {
+function buttonEvents () {
     for (button of buttons) {
         if (button.classList.contains('1')) {
             button.addEventListener('click', () => displayValues.textContent += '1');
@@ -49,11 +49,21 @@ function displayButtonValue () {
         } else if (button.classList.contains('9')) {
             button.addEventListener('click', () => displayValues.textContent += '9');
         } else if (button.classList.contains('divi')) {
-            button.addEventListener('click', () => displayValues.textContent += '÷');
+            button.addEventListener('click', () => {
+                array.push(Number(displayValues.textContent));
+                operation();
+                operator = '/';
+                displayContent += displayValues.textContent + "÷";
+                displayValues.textContent = "";
+            });
         } else if (button.classList.contains('multi')) {
-            button.addEventListener('click', () => displayValues.textContent += '×');
-            operator = '*';
-            operation();
+            button.addEventListener('click', () => {
+                array.push(Number(displayValues.textContent));
+                operation();
+                operator = '*';
+                displayContent += displayValues.textContent + "×";
+                displayValues.textContent = "";
+            });
         } else if (button.classList.contains('addd')) {
             button.addEventListener('click', () => {
                 array.push(Number(displayValues.textContent));
@@ -63,9 +73,13 @@ function displayButtonValue () {
                 displayValues.textContent = "";
             });
         } else if (button.classList.contains('subtra')) {
-            button.addEventListener('click', () => displayValues.textContent += '-');
-            operator = '-';
-            operation();
+            button.addEventListener('click', () => {
+                array.push(Number(displayValues.textContent));
+                operation();
+                operator = '-';
+                displayContent += displayValues.textContent + "-";
+                displayValues.textContent = "";
+            });
         } else if (button.classList.contains('dot')) {
             button.addEventListener('click', () => displayValues.textContent += '.');
         } else if (button.classList.contains('0')) {
@@ -92,8 +106,11 @@ function operation () {
 
 let firstNumber, secondNumber, operator;
 firstNumber = 0;
+
 const buttons = document.querySelectorAll('button');
 const displayValues = document.querySelector('.displayValues');
+
 let displayContent = "";
 let array = [];
-displayButtonValue();
+
+buttonEvents();

@@ -14,10 +14,11 @@ function divide (a, b) {
     return a / b;
 }
 
-function operate (firstNumber, operator, secondNumber) {
+function operate () {
     switch (operator) {
         case '+':
-            return add(firstNumber, secondNumber);
+            let x = add(firstNumber, secondNumber);
+            return x;
         case '-':
             return subtract(firstNumber, secondNumber);
         case '*':
@@ -51,21 +52,48 @@ function displayButtonValue () {
             button.addEventListener('click', () => displayValues.textContent += '÷');
         } else if (button.classList.contains('multi')) {
             button.addEventListener('click', () => displayValues.textContent += '×');
+            operator = '*';
+            operation();
         } else if (button.classList.contains('addd')) {
-            button.addEventListener('click', () => displayValues.textContent += '+');
+            button.addEventListener('click', () => {
+                array.push(Number(displayValues.textContent));
+                operation();
+                operator = '+';
+                displayContent += displayValues.textContent + "+";
+                displayValues.textContent = "";
+            });
         } else if (button.classList.contains('subtra')) {
             button.addEventListener('click', () => displayValues.textContent += '-');
+            operator = '-';
+            operation();
         } else if (button.classList.contains('dot')) {
             button.addEventListener('click', () => displayValues.textContent += '.');
         } else if (button.classList.contains('0')) {
             button.addEventListener('click', () => displayValues.textContent += '0');
+        } else if (button.classList.contains('=')) {
+            button.addEventListener('click', () => {
+                array.push(Number(displayValues.textContent));
+                operation();
+                displayValues.textContent = array[0];
+                array.pop();
+            });
         }
-        displayContent = displayValues.textContent;
+    }
+}
+
+function operation () {
+    if (array.length == 2) {
+        firstNumber = array[0];
+        secondNumber= array[1];
+        array.pop();
+        array[0] = operate();
     }
 }
 
 let firstNumber, secondNumber, operator;
+firstNumber = 0;
 const buttons = document.querySelectorAll('button');
 const displayValues = document.querySelector('.displayValues');
 let displayContent = "";
+let array = [];
 displayButtonValue();

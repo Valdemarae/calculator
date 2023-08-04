@@ -117,6 +117,8 @@ function buttonEvents () {
                 operator = undefined;
                 array.length = 0;
             });
+        } else if (button.classList.contains('delete')) {
+            button.addEventListener('click', () => displayValues.textContent = displayValues.textContent.slice(0, -1));
         }
     }
 }
